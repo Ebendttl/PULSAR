@@ -19,6 +19,7 @@ export interface WalrusSponsorUploadResult {
 
 export interface WalrusSponsorConfig {
   apiKey: string; // sbk_live_... key from krill.tube dashboard
+  creatorAddress: string; // Connected wallet Sui address
   epochs?: number; // Storage duration in Walrus epochs (default: 5)
 }
 
@@ -36,7 +37,7 @@ export async function uploadToWalrusSponsored(
   file: File | Blob,
   config: WalrusSponsorConfig
 ): Promise<WalrusSponsorUploadResult> {
-  const { apiKey, epochs = 5 } = config;
+  const { apiKey, creatorAddress, epochs = 5 } = config;
 
   if (!apiKey || !apiKey.startsWith("sbk_live_")) {
     throw new Error(
@@ -44,10 +45,15 @@ export async function uploadToWalrusSponsored(
     );
   }
 
+  if (!creatorAddress) {
+    throw new Error("Creator address is required. Please connect your wallet.");
+  }
+
   // Build multipart form data for the upload
   const formData = new FormData();
   formData.append("file", file);
   formData.append("epochs", String(epochs));
+  formData.append("creator_address", creatorAddress);
 
   const response = await fetch(`${WALRUS_SPONSOR_BASE_URL}/v1/upload`, {
     method: "POST",

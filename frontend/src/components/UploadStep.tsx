@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef } from "react";
+import { useCurrentAccount } from "@mysten/dapp-kit-react";
 import { uploadToWalrusSponsored, type WalrusSponsorUploadResult } from "../walrus";
 import { WALRUS_SPONSOR_API_KEY, COLLECTION_META } from "../config";
 
@@ -10,6 +11,7 @@ const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 const ACCEPTED_TYPES = ["image/png", "image/jpeg", "image/gif", "image/webp"];
 
 export function UploadStep({ onUploadComplete }: UploadStepProps) {
+  const account = useCurrentAccount();
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [nftName, setNftName] = useState("");
@@ -52,12 +54,18 @@ export function UploadStep({ onUploadComplete }: UploadStepProps) {
       return;
     }
 
+    if (!account?.address) {
+      setError("Please connect your wallet first.");
+      return;
+    }
+
     setIsUploading(true);
     setError(null);
 
     try {
       const result = await uploadToWalrusSponsored(file, {
         apiKey,
+        creatorAddress: account.address,
         epochs: COLLECTION_META.walrusStorageEpochs,
       });
       onUploadComplete(result, file, nftName.trim(), nftDescription.trim() || "PULSAR cosmic art");

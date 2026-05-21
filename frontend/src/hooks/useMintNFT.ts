@@ -13,6 +13,7 @@ export interface MintParams {
   nftName: string;
   nftDescription: string;
   walrusApiKey: string;
+  creatorAddress: string;
 }
 
 export interface MintResult {
@@ -39,6 +40,7 @@ export function useMintNFT() {
       try {
         walrusResult = await uploadToWalrusSponsored(params.imageFile, {
           apiKey: params.walrusApiKey,
+          creatorAddress: params.creatorAddress,
           epochs: COLLECTION_META.walrusStorageEpochs,
         });
         setUploadResult(walrusResult);
