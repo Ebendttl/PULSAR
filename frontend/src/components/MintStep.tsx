@@ -61,13 +61,9 @@ export function MintStep({ uploadResult, nftName, nftDescription, onMintSuccess,
 
       const txResult = "Transaction" in result ? result.Transaction : null;
       const digest = txResult?.digest || "unknown";
-      const created = txResult?.effects?.created || [];
-      const nftObj = created.find(
-        (obj: Record<string, unknown>) =>
-          obj.owner && typeof obj.owner === "object" &&
-          "AddressOwner" in (obj.owner as Record<string, unknown>)
-      );
-      const objectId = (nftObj as Record<string, unknown>)?.objectId as string | undefined;
+      const changedObjects = txResult?.effects?.changedObjects || [];
+      const nftObj = changedObjects.find((obj: any) => obj.idOperation === "Created");
+      const objectId = nftObj?.objectId;
 
       onMintSuccess(digest, objectId);
     } catch (err) {

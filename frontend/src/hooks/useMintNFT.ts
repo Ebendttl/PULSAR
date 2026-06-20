@@ -107,19 +107,14 @@ export function useMintNFT() {
         const digest = txResult?.digest || "unknown";
 
         // Extract minted NFT object ID from effects
-        const createdObjects = txResult?.effects?.created || [];
-        const nftObject = createdObjects.find(
-          (obj: Record<string, unknown>) =>
-            obj.owner &&
-            typeof obj.owner === "object" &&
-            "AddressOwner" in (obj.owner as Record<string, unknown>)
+        const changedObjects = txResult?.effects?.changedObjects || [];
+        const nftObject = changedObjects.find(
+          (obj: any) => obj.idOperation === "Created"
         );
 
         return {
           txDigest: digest,
-          nftObjectId: (nftObject as Record<string, unknown>)?.objectId as
-            | string
-            | undefined,
+          nftObjectId: nftObject?.objectId,
           walrusUpload: walrusResult,
         };
       } catch (err) {
