@@ -40,31 +40,29 @@ class ErrorBoundary extends React.Component<
             flexDirection: "column",
             padding: "40px",
             textAlign: "center",
-            background: "#03000f",
-            color: "#f0e8ff",
+            background: "var(--bg-primary)",
+            color: "var(--text-primary)",
           }}
         >
           <h1
             style={{
-              fontFamily: "Orbitron, sans-serif",
-              fontSize: "2rem",
+              fontFamily: "var(--font-display)",
+              fontSize: "1.75rem",
               marginBottom: "16px",
-              background: "linear-gradient(135deg, #7b2fff, #ff9f1c)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
+              color: "var(--text-primary)",
             }}
           >
             SIGNAL LOST
           </h1>
-          <p style={{ color: "#6b4a9b", maxWidth: "500px", lineHeight: 1.6 }}>
+          <p style={{ color: "var(--text-muted)", maxWidth: "500px", lineHeight: 1.6 }}>
             Something went wrong in the cosmic void. Please refresh to
             re-establish connection.
           </p>
           <p
             style={{
-              fontFamily: "IBM Plex Mono, monospace",
+              fontFamily: "var(--font-body)",
               fontSize: "0.8rem",
-              color: "#ff4466",
+              color: "var(--error)",
               marginTop: "16px",
             }}
           >
@@ -72,19 +70,10 @@ class ErrorBoundary extends React.Component<
           </p>
           <button
             onClick={() => window.location.reload()}
+            className="btn btn-primary"
             style={{
               marginTop: "24px",
-              padding: "12px 24px",
-              background: "linear-gradient(135deg, #7b2fff, #5a1fcc)",
-              border: "none",
-              borderRadius: "12px",
-              color: "white",
-              fontFamily: "Syne, sans-serif",
-              fontSize: "0.95rem",
-              fontWeight: 600,
-              cursor: "pointer",
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
+              width: "auto",
             }}
           >
             Reconnect
@@ -116,7 +105,7 @@ function AppContent() {
             href="https://sui.io"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: "#7b2fff" }}
+            style={{ color: "var(--accent-primary)" }}
           >
             Sui
           </a>{" "}
@@ -125,7 +114,7 @@ function AppContent() {
             href="https://walrus.space"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: "#ff9f1c" }}
+            style={{ color: "var(--accent-secondary)" }}
           >
             Walrus
           </a>
