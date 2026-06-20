@@ -78,7 +78,7 @@ export function UploadStep({ onUploadComplete }: UploadStepProps) {
 
   return (
     <div className="card">
-      <h3 className="card-title">🌌 Upload Your PULSAR Artwork</h3>
+      <h3 className="card-title">Upload Your PULSAR Artwork</h3>
 
       <div
         className={`upload-zone ${isDragActive ? "drag-active" : ""}`}
@@ -98,7 +98,22 @@ export function UploadStep({ onUploadComplete }: UploadStepProps) {
           <img src={preview} alt="Preview" className="upload-preview" />
         ) : (
           <>
-            <span className="upload-icon">🪐</span>
+            <svg
+              className="upload-icon-svg"
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="var(--accent-primary)"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{ marginBottom: "12px", opacity: 0.8 }}
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="17 8 12 3 7 8" />
+              <line x1="12" y1="3" x2="12" y2="15" />
+            </svg>
             <p style={{ color: "var(--text-primary)", fontWeight: 500 }}>
               Drag & Drop or Click to Select Image
             </p>

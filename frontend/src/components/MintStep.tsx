@@ -75,21 +75,41 @@ export function MintStep({ uploadResult, nftName, nftDescription, onMintSuccess,
 
   return (
     <div className="card">
-      <h3 className="card-title">✅ Uploaded to Walrus!</h3>
+      <h3 className="card-title">Uploaded to Walrus</h3>
 
       <div className="status-success">
         <div className="status-row">
           <span className="status-label">Blob ID</span>
           <span className="status-value">
             <span className="mono">{truncate(uploadResult.blob_id)}</span>
-            <button className="copy-btn" onClick={() => copyToClipboard(uploadResult.blob_id)} title="Copy">📋</button>
+            <button
+              className="copy-btn"
+              onClick={() => copyToClipboard(uploadResult.blob_id)}
+              title="Copy"
+              style={{ background: "none", border: "none", cursor: "pointer", padding: "4px", display: "inline-flex", alignItems: "center" }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: "var(--text-muted)" }}>
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+            </button>
           </span>
         </div>
         <div className="status-row">
           <span className="status-label">Sponsored Blob ID</span>
           <span className="status-value">
             <span className="mono">{truncate(uploadResult.sponsored_blob_id)}</span>
-            <button className="copy-btn" onClick={() => copyToClipboard(uploadResult.sponsored_blob_id)} title="Copy">📋</button>
+            <button
+              className="copy-btn"
+              onClick={() => copyToClipboard(uploadResult.sponsored_blob_id)}
+              title="Copy"
+              style={{ background: "none", border: "none", cursor: "pointer", padding: "4px", display: "inline-flex", alignItems: "center" }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: "var(--text-muted)" }}>
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+            </button>
           </span>
         </div>
         <div className="status-row">
@@ -100,9 +120,14 @@ export function MintStep({ uploadResult, nftName, nftDescription, onMintSuccess,
               target="_blank"
               rel="noopener noreferrer"
               className="mono"
-              style={{ color: "var(--accent-amber)", textDecoration: "none" }}
+              style={{ color: "var(--accent-amber)", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "4px" }}
             >
-              {truncate(uploadResult.tx_digest)} 🔗
+              {truncate(uploadResult.tx_digest)}
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ display: "inline-block" }}>
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
             </a>
           </span>
         </div>
@@ -134,7 +159,7 @@ export function MintStep({ uploadResult, nftName, nftDescription, onMintSuccess,
         {isMinting ? (
           <><span className="spinner" /> Minting on Sui...</>
         ) : (
-          `🚀 MINT NFT — ${COLLECTION_META.mintPriceDisplay}`
+          `MINT NFT — ${COLLECTION_META.mintPriceDisplay}`
         )}
       </button>
 
