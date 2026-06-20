@@ -15,12 +15,12 @@ This ledger serves as the persistent state, memory cache, and source of architec
   - `AdminCap` (Owned Object): Admin capability to pause/unpause and update mint configurations.
 
 ### Frontend Application Layer
-- **Framework:** React + Vite + TypeScript (running on WSL2, exposed via `--host 0.0.0.0`)
-- **UI Design System:** Custom deep-space animated system (`globals.css` with starfields, pulsars, card glows, and modular panels)
+- **Framework:** React + Vite + TypeScript (fully compiling, zero errors)
+- **UI Design System:** Refined Obsidian/Slate design system. Flat dark panels (`#0a0b10` background, `#12131a` card surfaces, subtle indigo/amber accents), minimal layouts, high typographic hierarchy, custom vector schematics (SVG) in place of cartoon/AI-generated emojis, and clean CSS borders without gratuitous animations or glows.
 - **Sui Integration Libraries:** 
   - `@mysten/dapp-kit-react` (v2.0.3)
-  - `@mysten/sui` (v2.17.0) with modern `SuiGrpcClient` interface
-- **Decentralized Storage Integration:** Krilly Walrus Sponsor REST SDK (direct multipart FormData uploads with wallet signature requirements)
+  - `@mysten/sui` (v2.17.0) integrating the updated `SuiJsonRpcClient` from `@mysten/sui/jsonRpc` (fully migrated to 2.0+ specs).
+- **Decentralized Storage Integration:** Krilly Walrus Sponsor REST SDK (direct multipart FormData uploads with wallet signature requirements).
 
 ---
 
@@ -42,10 +42,16 @@ This ledger serves as the persistent state, memory cache, and source of architec
 
 1. **Sui Move Smart Contract:** Compiles and publishes flawlessly. Fully manages supply guards, mint fee storage in the treasury, and excess SUI refunds.
 2. **Krilly Sponsor Integration Wrapper (`walrus.ts`):** Properly handles API validation, constructs correct multipart payloads with boundary separation, and exposes standard output shapes.
-3. **Sequential Mint Pipeline (`useMintNFT.ts`):** 
-  - Strictly follows the *Upload-to-Walrus-First* paradigm before building the Programmable Transaction Block.
-  - Successfully converts string-based blob identifiers to pure `vector<u8>` for the Sui Move parameters.
-4. **Deep-Space Frontend:** Fully operational, responsive, wallet-connect ready, and listening to hosts on `http://localhost:5173/`.
+3. **TypeScript Compilation (Fully Resolved):**
+   - Created `vite-env.d.ts` to expose `import.meta.env` properties globally.
+   - Refactored `dapp-kit.ts` to instantiate `SuiJsonRpcClient` from `@mysten/sui/jsonRpc` with the required `network` key.
+   - Refactored transaction resolution in `MintStep.tsx` and `useMintNFT.ts` to query `changedObjects` and `idOperation === "Created"` instead of the deprecated `effects.created` property to align with Sui SDK 2.0+ specifications.
+4. **Professional Obsidian/Slate UI:**
+   - Modified `globals.css` to remove all starry/neon backgrounds, neon glows, template headers, and rainbow gradients.
+   - Polished `SuccessModal.tsx` by removing distracting confetti loops and starburst rays.
+   - Cleaned up `NFTGallery.tsx` by substituting emoji grids with elegant schematic vector SVGs.
+   - Refined `UploadStep.tsx` and `MintStep.tsx` to replace planet/emoji symbols with custom cloud-upload and copy/link SVG icons.
+   - Replaced all visual tags that signal "vibe-coded" layout templates with highly structured, human-crafted slate/indigo controls.
 
 ---
 
