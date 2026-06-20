@@ -51,8 +51,17 @@ Create a `.env` file in the `frontend/` directory by copying `.env.example`. The
    npm run build
    ```
    This generates optimized static files inside `frontend/dist/`.
-5. Deploy `frontend/dist/` to your hosting provider.
-   * **Target Platform:** [NEEDS INPUT: Static hosting provider, e.g. Vercel, Netlify, Cloudflare Pages, is not configured in this repository].
+* **Target Platform:** Netlify (configured to serve static Vite assets from `/frontend/dist`).
+
+### Step 2.3: Configure Netlify Deployment
+1. Log in to the Netlify Dashboard and click **Add new site** -> **Import an existing project**.
+2. Connect your Git repository.
+3. In the build settings, configure:
+   * **Base directory:** `frontend`
+   * **Build command:** `npm run build`
+   * **Publish directory:** `frontend/dist`
+4. Under **Site Configuration** -> **Environment variables**, inject the 4 required environment variables listed in Section 1.
+5. Deploy the site. To support direct client-side reload routes, ensure a `_redirects` file containing `/* /index.html 200` is present in the publish directory.
 
 ---
 

@@ -32,9 +32,6 @@ export function NFTGallery() {
 
   return (
     <section className="gallery" id="nft-gallery">
-      <h2 className="gallery-title">
-        Collection — {maxSupply} Cosmic Artifacts
-      </h2>
       <div className="gallery-grid">
         {DEMO_NFTS.map((nft) => {
           const hasImage = nft.blobId.length > 0;
@@ -122,5 +119,15 @@ export function NFTGallery() {
 }
 
 function generateCosmicGradient(seed: number): string {
-  return "linear-gradient(135deg, #161822 0%, #0d0e15 100%)";
+  const gradients = [
+    "linear-gradient(135deg, #0c1222 0%, #1a1040 50%, #0c1222 100%)",
+    "linear-gradient(135deg, #0c1222 0%, #102030 50%, #081018 100%)",
+    "linear-gradient(135deg, #10081f 0%, #1a0a2e 50%, #0a0612 100%)",
+    "linear-gradient(135deg, #0a1628 0%, #0e2040 50%, #060e18 100%)",
+    "linear-gradient(135deg, #120c20 0%, #1e1435 50%, #0c0816 100%)",
+    "linear-gradient(135deg, #0c1a20 0%, #0a2530 50%, #060f14 100%)",
+    "linear-gradient(135deg, #181020 0%, #201838 50%, #100c18 100%)",
+    "linear-gradient(135deg, #0e1420 0%, #182838 50%, #0a0e14 100%)",
+  ];
+  return gradients[(seed - 1) % gradients.length];
 }

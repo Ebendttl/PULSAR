@@ -31,10 +31,9 @@ This ledger serves as the persistent state, memory cache, and source of architec
 - **CollectionConfig ID:** `0xac03d986504fa12774d133ab5f23c5fa4df5f1a710c4f3e671bb13b38b4ccb70`
 - **Explorer Verification:** [Suiscan Testnet Package Link](https://suiscan.xyz/testnet/object/0xf5935b16c60796a89c9beae130e8932fafa31ac744a4076a3c7ba4cdf02cf180)
 
-### Krilly Walrus Sponsor Integration
-- **API Key:** `sbk_live_Dsjx_jtKbN30_RtBAtV6teJJ` (Configured in `/frontend/.env` via `VITE_WALRUS_SPONSOR_API_KEY`)
-- **Workspace Deposit Address:** `0x0dbd1d28e57b8cd56478b5ba4a99528f4b6fd84aeb013ca70f4ac503d81d5472`
-- **Funding Status:** Funded with **0.5 SUI** (500,000,000 MIST) from the CLI Deployer Wallet to cover sponsor gas fees.
+### Netlify Hosting
+- **URL:** `https://pulsar-launchpad.netlify.app`
+- **Deploy Trigger:** Automated via git main branch push.
 
 ---
 
@@ -48,11 +47,19 @@ This ledger serves as the persistent state, memory cache, and source of architec
    - Refactored transaction resolution in `MintStep.tsx` and `useMintNFT.ts` to query `changedObjects` and `idOperation === "Created"` instead of the deprecated `effects.created` property to align with Sui SDK 2.0+ specifications.
 4. **Professional Obsidian/Slate UI:**
    - Modified `globals.css` to remove all starry/neon backgrounds, neon glows, template headers, and rainbow gradients.
-   - Polished `SuccessModal.tsx` by removing distracting confetti loops and starburst rays.
+   - Polished `SuccessModal.tsx` by removing distracting confetti rendering loops and starburst rays.
    - Cleaned up `NFTGallery.tsx` by substituting emoji grids with elegant schematic vector SVGs.
    - Refined `UploadStep.tsx` and `MintStep.tsx` to replace planet/emoji symbols with custom cloud-upload and copy/link SVG icons.
    - Replaced all visual tags that signal "vibe-coded" layout templates with highly structured, human-crafted slate/indigo controls.
-
+   - Added interactive system blueprint diagram and control terminals.
+   - Implemented a **Live Animated Pulsar Core SVG** in the Hero view featuring relativistic rotating light beams and expanding magnetic force rings.
+   - Implemented a **Real-Time Telemetry Monitor Log** component that syncs, processes, and displays mock system connection heartbeats and connection updates periodically.
+5. **Netlify Deployment Hosting:**
+   - Automated deployment setup and environmental variables configurations are active.
+   - Configured `public/_redirects` file ensures correct client fallback routing.
+   - Integrated custom high-fidelity SVG `favicon.svg` asset copy rules.
+6. **Multi-Tab SPA Navigation (Fully Resolved):**
+   - Refactored `Header.tsx` and `App.tsx` navigation boundaries to drive the active tab state (`Home` / `Collections` / `Create` / `Launchpad`) dynamically.
 ---
 
 ## 🚧 4. Current Core Focus & Active Debugging Loop
