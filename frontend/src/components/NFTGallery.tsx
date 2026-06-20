@@ -1,5 +1,24 @@
 import { COLLECTION_META, WALRUS_AGGREGATOR } from "../config";
 
+function renderPlaceholderSVG() {
+  return (
+    <svg
+      width="48"
+      height="48"
+      viewBox="0 0 64 64"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ opacity: 0.25 }}
+    >
+      <circle cx="32" cy="32" r="5" fill="var(--text-primary)" />
+      <circle cx="32" cy="32" r="16" stroke="var(--text-muted)" strokeWidth="1" strokeDasharray="3 3" />
+      <circle cx="32" cy="32" r="26" stroke="var(--text-muted)" strokeWidth="0.75" strokeDasharray="4 4" />
+      <line x1="32" y1="4" x2="32" y2="60" stroke="var(--text-muted)" strokeWidth="0.5" strokeDasharray="2 2" />
+      <line x1="4" y1="32" x2="60" y2="32" stroke="var(--text-muted)" strokeWidth="0.5" strokeDasharray="2 2" />
+    </svg>
+  );
+}
+
 // Demo NFTs for gallery display
 const DEMO_NFTS = [
   { number: 1, name: "Cosmic Pulse Alpha", blobId: "" },
@@ -35,22 +54,12 @@ export function NFTGallery() {
                     : generateCosmicGradient(nft.number),
                   position: "relative",
                   zIndex: 1,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
-                {!hasImage && (
-                  <div
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontSize: "3rem",
-                    }}
-                  >
-                    {["🌟", "💫", "✨", "🪐"][nft.number % 4]}
-                  </div>
-                )}
+                {!hasImage && renderPlaceholderSVG()}
               </div>
               <div className="nft-card-body">
                 <span className="nft-card-number">
@@ -67,7 +76,7 @@ export function NFTGallery() {
           (_, i) => {
             const num = DEMO_NFTS.length + i + 1;
             return (
-              <div key={`empty-${num}`} className="nft-card" style={{ opacity: 0.4 }}>
+              <div key={`empty-${num}`} className="nft-card" style={{ opacity: 0.55 }}>
                 <span className="nft-card-badge">#{num}</span>
                 <div
                   style={{
@@ -77,16 +86,19 @@ export function NFTGallery() {
                     position: "relative",
                     zIndex: 1,
                     display: "flex",
+                    flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
+                    gap: "12px",
                   }}
                 >
+                  {renderPlaceholderSVG()}
                   <span
                     style={{
                       fontFamily: "var(--font-display)",
-                      fontSize: "0.8rem",
+                      fontSize: "0.7rem",
                       color: "var(--text-dim)",
-                      letterSpacing: "0.15em",
+                      letterSpacing: "0.1em",
                     }}
                   >
                     AWAITING MINT
@@ -110,7 +122,5 @@ export function NFTGallery() {
 }
 
 function generateCosmicGradient(seed: number): string {
-  const hue1 = (seed * 47 + 260) % 360;
-  const hue2 = (seed * 83 + 30) % 360;
-  return `linear-gradient(${seed * 45}deg, hsl(${hue1}, 60%, 8%), hsl(${hue2}, 70%, 12%), hsl(${hue1}, 50%, 5%))`;
+  return "linear-gradient(135deg, #161822 0%, #0d0e15 100%)";
 }
